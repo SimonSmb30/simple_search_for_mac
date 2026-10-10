@@ -32,7 +32,7 @@ Simple Search is a small app launcher for macOS, a stripped-down Spotlight that 
 
 A ready-built app is attached to the [latest release](https://github.com/SimonSmb30/simple_search_for_mac/releases/latest).
 
-1. Download `Simple-Search-1.0.zip` from the release page and unzip it (double-click the file).
+1. Download `Simple-Search-1.1.zip` from the release page and unzip it (double-click the file).
 2. Move `Simple Search.app` into the Applications folder.
 3. Start it. The first start is blocked, see below.
 
