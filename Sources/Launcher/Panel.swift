@@ -127,7 +127,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         if settingsWindow == nil {
             let w = NSWindow(contentRect: NSRect(x: 0, y: 0, width: 420, height: 150),
                              styleMask: [.titled, .closable], backing: .buffered, defer: false)
-            w.title = "Simple Search Einstellungen"
+            w.title = L10n.windowTitle
             w.contentView = NSHostingView(rootView: SettingsView())
             w.isReleasedWhenClosed = false
             w.center()

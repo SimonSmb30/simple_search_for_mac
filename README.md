@@ -103,10 +103,10 @@ There is no menu bar icon. Open the settings with ⌘, while the search window i
 
 <img src="docs/screenshots/settings.png" width="420" alt="Settings window with the keyboard shortcut and the switch for starting at login">
 
-- **Keyboard shortcut** (Tastenkürzel): click the button, then press the new combination. It is saved at once. The combination must contain ⌘, ⌥, ⌃ or ⇧. Esc cancels. The shortcut is switched off while it is being recorded.
-- **Start at login** (Beim Login starten): adds the app to the login items. This works most reliably when the app is in the Applications folder. If macOS refuses, the reason is shown below the switch, and you can also allow it in System Settings > General > Login Items.
+- **Keyboard shortcut**: click the button, then press the new combination. It is saved at once. The combination must contain ⌘, ⌥, ⌃ or ⇧. Esc cancels. The shortcut is switched off while it is being recorded.
+- **Start at login**: adds the app to the login items. This works most reliably when the app is in the Applications folder. If macOS refuses, the reason is shown below the switch, and you can also allow it in System Settings > General > Login Items.
 
-The settings window is in German at the moment.
+The settings window is in German when macOS is set to German and in English otherwise.
 
 ### Using Command-Space
 

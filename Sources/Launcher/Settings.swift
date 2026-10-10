@@ -2,6 +2,18 @@ import SwiftUI
 import Carbon
 import ServiceManagement
 
+/// Deutsch, wenn die Systemsprache Deutsch ist, sonst Englisch.
+enum L10n {
+    static let isGerman = Locale.preferredLanguages.first?.hasPrefix("de") ?? false
+    static func t(_ de: String, _ en: String) -> String { isGerman ? de : en }
+
+    static var windowTitle: String { t("Simple Search Einstellungen", "Simple Search Settings") }
+    static var shortcut: String { t("Tastenkürzel", "Keyboard Shortcut") }
+    static var recording: String { t("Kürzel drücken … (Esc bricht ab)", "Press shortcut … (Esc cancels)") }
+    static var launchAtLogin: String { t("Beim Login starten", "Start at Login") }
+    static var leertaste: String { t("Leertaste", "Space") }
+}
+
 final class Settings: ObservableObject {
     static let shared = Settings()
     private let d = UserDefaults.standard
@@ -17,8 +29,9 @@ final class Settings: ObservableObject {
     init() {
         keyCode = d.object(forKey: "keyCode") as? UInt32 ?? UInt32(kVK_Space)
         modifiers = d.object(forKey: "modifiers") as? UInt32 ?? UInt32(optionKey)
-        keyLabel = d.string(forKey: "keyLabel") ?? "Leertaste"
+        keyLabel = d.string(forKey: "keyLabel") ?? L10n.leertaste
         launchAtLogin = SMAppService.mainApp.status == .enabled
+        if keyCode == UInt32(kVK_Space) { keyLabel = L10n.leertaste }
     }
 
     var shortcutText: String {
@@ -69,7 +82,7 @@ final class Settings: ObservableObject {
 
     private static func label(for e: NSEvent) -> String {
         switch Int(e.keyCode) {
-        case kVK_Space: return "Leertaste"
+        case kVK_Space: return L10n.leertaste
         case kVK_Return: return "↩"
         case kVK_Tab: return "⇥"
         case kVK_LeftArrow: return "←"
@@ -86,12 +99,12 @@ struct SettingsView: View {
 
     var body: some View {
         Form {
-            LabeledContent("Tastenkürzel") {
-                Button(s.recording ? "Kürzel drücken … (Esc bricht ab)" : s.shortcutText) {
+            LabeledContent(L10n.shortcut) {
+                Button(s.recording ? L10n.recording : s.shortcutText) {
                     s.recording ? s.stopRecording() : s.startRecording()
                 }
             }
-            Toggle("Beim Login starten", isOn: Binding(get: { s.launchAtLogin }, set: { s.setLaunchAtLogin($0) }))
+            Toggle(L10n.launchAtLogin, isOn: Binding(get: { s.launchAtLogin }, set: { s.setLaunchAtLogin($0) }))
             if let e = s.loginError {
                 Text(e).font(.caption).foregroundStyle(.red)
             }
