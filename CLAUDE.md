@@ -11,6 +11,9 @@ macOS-26-App (Swift 6.2 Package, Language Mode 5, SwiftUI + AppKit), die nur App
 - Kein Menüleisten- und kein Dock-Icon (`LSUIElement`, `.accessory`). Einstellungen nur per ⌘+Komma im Panel oder App erneut öffnen (`applicationShouldHandleReopen`). Nicht ungefragt ein Menüleisten-Icon einbauen.
 - Panel ist ein `NSPanel` mit 40 pt transparentem Rand um das Glas (`margin`), damit der Overshoot der Öffnen-Animation nicht abgeschnitten wird. Panelhöhe = `SearchModel.panelHeight`; bei leerem Suchfeld ist die Liste eingeklappt.
 - Tastatursteuerung über lokalen `NSEvent`-Monitor in `Panel.swift`, nicht über SwiftUI-`onKeyPress` (Tab wird sonst vom Fokussystem abgefangen).
+- Panel hat bewusst `hasShadow = false`: der Fensterschatten blieb nach dem Resize als dunkle Kontur in alter Form stehen.
+- Safari liegt unter `/System/Cryptexes/App/System/Applications` (in `/Applications` nur Symlink, der vom Enumerator nicht geliefert wird) und steht deshalb in den Scan-Roots.
+- README und Release folgen dem Muster von `../notepad` (englisch, Inhaltsverzeichnis, Screenshots in `docs/screenshots`, Release mit ZIP und Notes). Screenshots entstehen vor einem Farbverlauf-Hintergrund, nie vom echten Desktop (private Inhalte).
 - Hotkey liegt in UserDefaults (`keyCode`, `modifiers`, `keyLabel`), Standard ⌥+Leertaste. Beim Aufnehmen wird der Hotkey kurz deaktiviert.
 - Animationsparameter: Öffnen `CASpringAnimation` (stiffness 320, damping 25, Start 40 %), Schließen Keyframes 1 → 1,03 → 0,4 in 0,22 s.
 - Icon: `icon.svg` wird manuell zu `AppIcon.icns` gerendert, `build.sh` kopiert nur die vorhandene icns.

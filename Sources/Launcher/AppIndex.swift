@@ -13,7 +13,7 @@ final class AppIndex {
 
     func reload() {
         let home = FileManager.default.homeDirectoryForCurrentUser.path
-        let roots = ["/Applications", "/System/Applications", "\(home)/Applications"]
+        let roots = ["/Applications", "/System/Applications", "/System/Cryptexes/App/System/Applications", "\(home)/Applications"]
         var found: [URL: AppItem] = [:]
         for root in roots {
             guard let e = FileManager.default.enumerator(
@@ -26,7 +26,8 @@ final class AppIndex {
                 found[url] = AppItem(id: url, name: name)
             }
         }
-        apps = found.values.sorted { $0.name.localizedCaseInsensitiveCompare($1.name) == .orderedAscending }
+        var seen = Set<String>()
+        apps = found.values.filter { seen.insert($0.name).inserted }.sorted { $0.name.localizedCaseInsensitiveCompare($1.name) == .orderedAscending }
     }
 
     func search(_ query: String) -> [AppItem] {
